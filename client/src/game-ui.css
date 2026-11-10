@@ -1,0 +1,693 @@
+#hud {
+  z-index: 4;
+  left: 18px;
+  right: 18px;
+  top: 14px;
+  min-height: 48px;
+  padding: 7px;
+  border: 1px solid #ffffff24;
+  border-radius: 16px;
+  background: linear-gradient(110deg, #0b1425dc, #17243bd9);
+  box-shadow: 0 8px 26px #0005, inset 0 1px #ffffff12;
+  backdrop-filter: blur(12px);
+}
+
+#hud > span {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: #ffffff0b;
+  letter-spacing: .04em;
+}
+
+#hudMode {
+  max-width: 46%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #d7e8ff;
+}
+
+#hudTimer {
+  gap: 8px;
+  color: #ffe3a2;
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+}
+
+#hudTimer::before {
+  content: "◷";
+  color: #ffc96c;
+  font-size: 18px;
+}
+
+#hudAlive {
+  max-width: 34%;
+  justify-content: flex-end;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #e0e9fa;
+}
+
+#hudAlive .hearts {
+  margin-left: 5px;
+}
+
+#hud button#exitGame {
+  padding: 8px 14px;
+  border: 1px solid #ffffff24;
+  border-radius: 10px;
+  background: #263a5acc;
+  transition: background .16s ease, transform .16s ease;
+}
+
+#hud button#exitGame:hover {
+  background: #3a5278;
+  transform: translateY(-1px);
+}
+
+.controls-guide {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  width: min(940px, calc(100% - 36px));
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.guide-card {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid #ffffff25;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #101b2de8, #182945e8);
+  box-shadow: 0 10px 30px #0005, inset 0 1px #ffffff12;
+  backdrop-filter: blur(12px);
+}
+
+.guide-heading {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+
+.guide-icon {
+  width: 35px;
+  height: 35px;
+  flex: 0 0 35px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #73e5e155;
+  border-radius: 11px;
+  background: #65e8e51a;
+  color: #8af7eb;
+  font-size: 20px;
+}
+
+.gamepad-icon {
+  border-color: #b99aff55;
+  background: #b99aff1a;
+}
+
+.guide-heading strong,
+.guide-heading small {
+  display: block;
+  white-space: nowrap;
+}
+
+.guide-heading strong {
+  color: #f0f5ff;
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+
+.guide-heading small {
+  margin-top: 4px;
+  color: #91a6c5;
+  font-size: 9px;
+}
+
+.guide-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  min-width: 0;
+}
+
+.guide-action {
+  min-width: 0;
+  min-height: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 2px;
+  border: 1px solid #ffffff12;
+  border-radius: 9px;
+  background: #080f1c6b;
+  color: #a9bad3;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.guide-action kbd {
+  min-width: 20px;
+  height: 19px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0 4px;
+  border: 1px solid #8195b655;
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: linear-gradient(#273b58, #1a2940);
+  color: #f5f8ff;
+  font: 800 10px/1 Inter, system-ui, sans-serif;
+}
+
+.guide-action kbd.wide-key {
+  font-size: 8px;
+}
+
+.key-group {
+  display: flex;
+  gap: 2px;
+}
+
+.stick-key {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #d5c6ff;
+  font-size: 15px;
+}
+
+.stick-key small {
+  color: #d5c6ff;
+  font-size: 8px;
+}
+
+@media (max-width: 760px) {
+  .controls-guide {
+    width: calc(100% - 20px);
+    gap: 6px;
+  }
+
+  .guide-card {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 7px;
+  }
+
+  .guide-heading {
+    gap: 6px;
+  }
+
+  .guide-icon {
+    width: 27px;
+    height: 27px;
+    flex-basis: 27px;
+    font-size: 16px;
+  }
+
+  .guide-heading strong {
+    font-size: 9px;
+  }
+
+  .guide-heading small {
+    margin-top: 2px;
+    font-size: 8px;
+  }
+
+  .guide-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .guide-action {
+    min-height: 34px;
+    gap: 3px;
+    font-size: 8px;
+  }
+
+  #touch-controls {
+    bottom: 142px;
+  }
+}
+
+@media (max-width: 420px) {
+  .controls-guide {
+    width: calc(100% - 12px);
+    gap: 4px;
+    bottom: max(6px, env(safe-area-inset-bottom));
+  }
+
+  .guide-card {
+    padding: 5px;
+  }
+
+  .guide-action {
+    min-height: 31px;
+    font-size: 7px;
+  }
+
+  .guide-action kbd {
+    min-width: 17px;
+    height: 17px;
+    font-size: 9px;
+  }
+
+  .stick-key small {
+    font-size: 7px;
+  }
+
+  #hud {
+    left: 6px;
+    right: 6px;
+    top: 6px;
+    gap: 4px;
+    padding: 5px;
+  }
+
+  #hud > span {
+    padding: 0 6px;
+    font-size: 9px;
+  }
+}
+
+#pauseTouch {
+  display: none;
+}
+
+.touch-move {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  color: #b6d6ee;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-shadow: 0 2px 6px #000;
+}
+
+.touch-actions button small {
+  color: inherit;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+
+#rotatePrompt {
+  z-index: 40;
+  text-align: center;
+}
+
+#rotatePrompt > p {
+  margin-bottom: 0;
+  color: #b5c4dc;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.rotate-phone {
+  position: relative;
+  width: 52px;
+  height: 72px;
+  margin: 0 auto 12px;
+  color: #8bf5ff;
+  font: 800 72px/.9 Inter, sans-serif;
+  text-shadow: 0 0 22px #65e8e566;
+  transform: rotate(0);
+  animation: rotate-phone-hint 1.5s ease-in-out infinite alternate;
+}
+
+.rotate-phone span {
+  position: absolute;
+  right: -24px;
+  bottom: -5px;
+  font-size: 24px;
+}
+
+@keyframes rotate-phone-hint {
+  to { transform: rotate(90deg); }
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+  #game {
+    position: absolute;
+    top: 8dvh;
+    left: 0;
+    width: 100%;
+    height: 55dvh;
+  }
+
+  #hud {
+    z-index: 5;
+    top: max(7px, env(safe-area-inset-top));
+    left: max(7px, env(safe-area-inset-left));
+    right: max(7px, env(safe-area-inset-right));
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto auto auto;
+    gap: 4px;
+    min-height: 42px;
+    padding: 4px;
+    border-radius: 12px;
+  }
+
+  #hud > span {
+    min-height: 30px;
+    padding: 0 5px;
+    font-size: clamp(7px, 2.2vw, 9px);
+  }
+
+  #hudMode {
+    max-width: none;
+  }
+
+  #hudTimer {
+    gap: 3px;
+    font-size: 10px;
+  }
+
+  #hudTimer::before {
+    font-size: 12px;
+  }
+
+  #hudAlive {
+    max-width: 24vw;
+    font-size: 8px;
+  }
+
+  #hud button#pauseTouch,
+  #hud button#exitGame {
+    width: 34px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border-radius: 9px;
+    font-size: 15px;
+  }
+
+  #touch-controls {
+    z-index: 6;
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(44px, calc(env(safe-area-inset-bottom) + 30px));
+    align-items: flex-end;
+    gap: 12px;
+  }
+
+  .touch-move {
+    gap: 7px;
+    font-size: 10px;
+  }
+
+  #stick {
+    width: clamp(112px, 36vw, 144px);
+    height: clamp(112px, 36vw, 144px);
+    border-width: 3px;
+    background: radial-gradient(circle, #d9f6ff24 0 34%, #d9f6ff12 35% 100%);
+    box-shadow: 0 8px 22px #0005, inset 0 0 22px #77e7ed1a;
+  }
+
+  #stick-knob {
+    left: 50%;
+    top: 50%;
+    width: clamp(48px, 15vw, 60px);
+    height: clamp(48px, 15vw, 60px);
+    transform: translate(-50%, -50%);
+    border: 2px solid #bcffffaa;
+    box-shadow: 0 3px 12px #0006, inset 0 1px #ffffff66;
+  }
+
+  .touch-actions {
+    display: grid;
+    grid-template-columns: repeat(2, clamp(56px, 18vw, 70px));
+    gap: 9px;
+    padding-bottom: 2px;
+  }
+
+  .touch-actions button {
+    width: clamp(56px, 18vw, 70px);
+    height: clamp(56px, 18vw, 70px);
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    margin: 0;
+    padding: 3px;
+    border: 1px solid #a7f4ff77;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #28769adf, #152e50ed);
+    box-shadow: 0 5px 12px #0006, inset 0 1px #ffffff33;
+    font-size: 19px;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .touch-actions button:active {
+    transform: scale(.93);
+    filter: brightness(1.35);
+  }
+
+  .touch-actions button small {
+    display: block;
+    width: 100%;
+    font-size: 8px;
+    line-height: 1.1;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .touch-actions button > span {
+    display: block;
+    font-size: clamp(25px, 7vw, 31px);
+    line-height: 1;
+  }
+
+  #jumpTouch {
+    grid-column: 2;
+  }
+
+  #pickTouch {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  #throwTouch {
+    grid-column: 2;
+    grid-row: 2;
+    border-color: #ffcf6888;
+    background: linear-gradient(145deg, #9d5a31e8, #49263cec);
+  }
+
+  .controls-guide {
+    display: none;
+  }
+
+  #toast {
+    z-index: 8;
+    top: max(58px, calc(env(safe-area-inset-top) + 52px));
+    width: min(90vw, 420px);
+    padding: 9px 12px;
+    font-size: 11px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 380px) and (orientation: portrait) {
+  #touch-controls {
+    left: 8px;
+    right: 8px;
+    gap: 7px;
+  }
+
+  .touch-actions {
+    grid-template-columns: repeat(2, 54px);
+    gap: 6px;
+  }
+
+  .touch-actions button {
+    width: 54px;
+    height: 54px;
+    border-radius: 17px;
+  }
+}
+
+@media (max-height: 600px) and (orientation: landscape) and (pointer: coarse) {
+  #game-wrap {
+    --mobile-control-rail: clamp(112px, 16vw, 138px);
+    --mobile-arena-width: min(calc(100vw - var(--mobile-control-rail) - var(--mobile-control-rail)), 154dvh);
+    --mobile-arena-side-gap: max(0px, calc((100vw - var(--mobile-arena-width)) / 2));
+    --mobile-stick-size: clamp(62px, 16vh, 90px);
+    --mobile-action-size: clamp(48px, 13vh, 64px);
+    --mobile-action-gap: clamp(5px, 1.4vh, 8px);
+  }
+
+  #game {
+    position: absolute;
+    top: 0;
+    left: var(--mobile-control-rail);
+    width: calc(100% - var(--mobile-control-rail) - var(--mobile-control-rail));
+    height: 100dvh;
+  }
+
+  #hud {
+    z-index: 5;
+    top: max(4px, env(safe-area-inset-top));
+    left: calc(var(--mobile-control-rail) + 4px);
+    right: calc(var(--mobile-control-rail) + 4px);
+    min-height: 36px;
+    gap: 4px;
+    padding: 3px;
+    border-radius: 10px;
+  }
+
+  #hud > span {
+    min-height: 27px;
+    padding: 0 6px;
+    font-size: 9px;
+  }
+
+  #hudMode {
+    max-width: 46%;
+  }
+
+  #hudAlive {
+    max-width: 32%;
+  }
+
+  #hud button#pauseTouch,
+  #hud button#exitGame {
+    width: 32px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    font-size: 13px;
+  }
+
+  #touch-controls {
+    z-index: 6;
+    position: absolute;
+    inset: 0;
+    display: block;
+    pointer-events: none;
+  }
+
+  .touch-move {
+    position: absolute;
+    top: 63%;
+    left: calc(var(--mobile-arena-side-gap) / 2 - var(--mobile-stick-size) / 2);
+    width: var(--mobile-stick-size);
+    gap: 5px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 8px;
+  }
+
+  #stick {
+    width: var(--mobile-stick-size);
+    height: var(--mobile-stick-size);
+    pointer-events: auto;
+  }
+
+  #stick-knob {
+    left: 50%;
+    top: 50%;
+    width: clamp(32px, 8vh, 48px);
+    height: clamp(32px, 8vh, 48px);
+    transform: translate(-50%, -50%);
+  }
+
+  .touch-actions {
+    position: absolute;
+    top: 60%;
+    right: calc(var(--mobile-arena-side-gap) / 2 - var(--mobile-action-size) - var(--mobile-action-gap) / 2);
+    display: grid;
+    grid-template-columns: repeat(2, var(--mobile-action-size));
+    gap: var(--mobile-action-gap);
+    transform: translateY(-50%);
+    pointer-events: auto;
+  }
+
+  .touch-actions button,
+  .touch-actions button#jumpTouch,
+  .touch-actions button#pickTouch,
+  .touch-actions button#throwTouch {
+    width: var(--mobile-action-size);
+    height: var(--mobile-action-size);
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    margin: 0;
+    padding: 4px;
+    border-radius: 17px;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .touch-actions button > span {
+    display: block;
+    font-size: clamp(25px, 7vh, 34px);
+    line-height: 1;
+  }
+
+  .touch-actions button small {
+    display: block;
+    width: 100%;
+    color: #f3f8ff;
+    font-size: clamp(7px, 1.8vh, 9px);
+    line-height: 1.1;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .touch-actions button#throwTouch {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  .touch-actions button#jumpTouch {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .touch-actions button#pickTouch {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .controls-guide {
+    display: none;
+  }
+
+  #toast {
+    z-index: 8;
+    top: max(44px, calc(env(safe-area-inset-top) + 38px));
+    width: min(60vw, 420px);
+    padding: 7px 10px;
+    font-size: 10px;
+  }
+}

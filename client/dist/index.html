@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#10182b">
+  <meta name="description" content="Blast Island: videojuego local de combate en arena para hasta cuatro jugadores.">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <title>Blast Island — Multijugador local</title>
+  <script type="module" crossorigin src="/assets/index-vQK5f9s-.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Da8ojq-h.css">
+</head>
+<body>
+  <main id="app">
+    <div class="menu-ambient" aria-hidden="true"><i class="orb orb-one"></i><i class="orb orb-two"></i><i class="orb orb-three"></i><i class="island island-one"></i><i class="island island-two"></i><i class="spark spark-one"></i><i class="spark spark-two"></i><i class="spark spark-three"></i></div>
+    <section id="menu" class="panel">
+      <div class="eyebrow">MULTIJUGADOR LOCAL · 1–4 JUGADORES</div>
+      <div class="menu-showcase" aria-hidden="true">
+        <div class="showcase-orbit orbit-a"></div>
+        <div class="showcase-orbit orbit-b"></div>
+        <div class="showcase-island"><span></span><i></i></div>
+        <div class="showcase-player showcase-player-cyan">
+          <span class="player-shadow"></span><span class="player-body"><i class="player-eye eye-left"></i><i class="player-eye eye-right"></i><i class="player-smile"></i></span>
+          <span class="player-arm arm-left"></span><span class="player-arm arm-right"></span>
+          <span class="player-leg leg-left"></span><span class="player-leg leg-right"></span>
+        </div>
+        <div class="showcase-player showcase-player-coral">
+          <span class="player-shadow"></span><span class="player-body"><i class="player-eye eye-left"></i><i class="player-eye eye-right"></i><i class="player-smile"></i></span>
+          <span class="player-arm arm-left"></span><span class="player-arm arm-right"></span>
+          <span class="player-leg leg-left"></span><span class="player-leg leg-right"></span>
+        </div>
+        <div class="showcase-player showcase-player-lime">
+          <span class="player-shadow"></span><span class="player-body"><i class="player-eye eye-left"></i><i class="player-eye eye-right"></i><i class="player-smile"></i></span>
+          <span class="player-arm arm-left"></span><span class="player-arm arm-right"></span>
+          <span class="player-leg leg-left"></span><span class="player-leg leg-right"></span>
+        </div>
+        <span class="showcase-bomb bomb-a"><i></i></span>
+        <span class="showcase-bomb bomb-b"><i></i></span>
+        <span class="showcase-spark spark-a">✦</span>
+        <span class="showcase-spark spark-b">✧</span>
+        <span class="showcase-caption">¡PREPÁRATE PARA EL CAOS!</span>
+      </div>
+      <h1>BLAST<br><span>ISLAND</span></h1>
+      <p class="subtitle">Una computadora. Hasta cuatro jugadores. ¡Que comience el combate!</p>
+      <div id="mainActions">
+        <button id="playMenuBtn" class="primary">Jugar</button>
+        <button id="exitAppBtn" class="ghost">Salir</button>
+      </div>
+      <div id="menuOptions" class="hidden">
+      <div class="local-info">
+        <div class="control-card"><strong>JUGADOR 1</strong><span>Teclado</span><small>WASD · Espacio · E · Q</small></div>
+        <div class="control-card"><strong>JUGADORES 2–4</strong><span>Mandos USB o Bluetooth</span><small>Presiona cualquier botón para unirte</small></div>
+      </div>
+      <label>Nombre del jugador 1<input id="nickname" maxlength="16" value="Jugador 1" autocomplete="off"></label>
+      <label>Personaje<select id="skin"><option value="cyan">Neón</option><option value="coral">Coral</option><option value="lime">Lima</option><option value="violet">Violeta</option></select></label>
+      <button id="openLobbyBtn" class="primary">Configurar jugadores</button>
+      <button id="showRankingBtn" class="ghost">Ver ranking local</button>
+      <button id="openSettingsBtn" class="ghost">Ajustes técnicos</button>
+      <button id="openCreditsBtn" class="ghost">Créditos</button>
+      <button id="installAppBtn" class="ghost">Descargar / instalar app</button>
+      <p id="status" role="status">Conecta hasta tres mandos y pulsa cualquier botón para agregarlos.</p>
+      </div>
+    </section>
+
+    <section id="credits" class="panel modal hidden" aria-labelledby="creditsTitle">
+      <div class="eyebrow">HECHO CON TECNOLOGÍA WEB</div>
+      <h2 id="creditsTitle">Créditos</h2>
+      <p>Blast Island está construido con:</p>
+      <div class="bomb-rules credits-list">
+        <div class="bomb-rule"><span class="bomb-rule-icon classic" aria-hidden="true">JS</span><p><strong>JavaScript, HTML y CSS</strong><small>Lógica del juego, estructura y diseño adaptable.</small></p></div>
+        <div class="bomb-rule"><span class="bomb-rule-icon ice" aria-hidden="true">✹</span><p><strong>Phaser 3</strong><small>Motor para escenas, animaciones, controles y efectos.</small></p></div>
+        <div class="bomb-rule"><span class="bomb-rule-icon sticky" aria-hidden="true">⚡</span><p><strong>Vite</strong><small>Desarrollo local y compilación para publicación.</small></p></div>
+        <div class="bomb-rule"><span class="bomb-rule-icon shield" aria-hidden="true">♫</span><p><strong>Web Audio API</strong><small>Efectos de sonido y audio del juego.</small></p></div>
+        <div class="bomb-rule"><span class="bomb-rule-icon instant" aria-hidden="true">▣</span><p><strong>Progressive Web App</strong><small>Manifest y Service Worker para instalar y abrir la app.</small></p></div>
+      </div>
+      <button id="closeCreditsBtn" class="primary">Volver</button>
+    </section>
+
+    <section id="lobby" class="panel hidden">
+      <div class="eyebrow">PREPARADOS PARA LA PARTIDA</div>
+      <h2>Jugadores <strong id="playerCount">1 / 4</strong></h2>
+      <p id="lobbyInfo">El jugador 1 participa con teclado.</p>
+      <ul id="players"></ul>
+      <div class="lobby-hint">Para agregar jugadores, conecta un mando y presiona A, X, Start o cualquier botón. Se admiten hasta 3 mandos adicionales.</div>
+      <label>Modo de juego<select id="mode"><option value="ffa">Todos contra todos</option><option value="teams">Combate por equipos</option></select></label>
+      <label>Arena<select id="arena"></select><small id="arenaDescription"></small></label>
+      <button id="startBtn" class="primary">Comenzar partida</button>
+      <button id="backBtn" class="ghost">Volver</button>
+    </section>
+
+    <section id="soloConfirm" class="panel modal hidden" aria-labelledby="soloConfirmTitle">
+      <div class="eyebrow">JUGADOR ÚNICO</div>
+      <h2 id="soloConfirmTitle">¿Quieres jugar <strong>contra la IA?</strong></h2>
+      <p>La IA Maestra será tu rival. Si eliges que no, podrás conectar un mando antes de empezar.</p>
+      <button id="soloConfirmYes" class="primary">Sí, jugar contra IA Maestra</button>
+      <button id="soloConfirmNo" class="ghost">No, quiero conectar un mando</button>
+    </section>
+
+    <section id="rules" class="panel modal hidden" aria-labelledby="rulesTitle">
+      <div class="eyebrow">LEE ESTO ANTES DE SALTAR A LA ARENA</div>
+      <h2 id="rulesTitle">Reglas de la <strong>partida</strong></h2>
+      <p id="rulesMatchInfo" class="rules-match-info"></p>
+      <div class="rules-objective">
+        <span class="rules-objective-icon" aria-hidden="true">🏆</span>
+        <p><strong>¿Qué tienes que hacer?</strong><br>Muévete, salta, recoge bombas y lánzalas. Evita las explosiones: un impacto directo quita una vida y cada jugador empieza con <b>3 vidas</b>. Gana quien quede en pie.</p>
+      </div>
+      <div class="bomb-rules">
+        <h3>Bombas que puedes encontrar</h3>
+        <div class="bomb-rule"><span class="bomb-rule-icon classic" aria-hidden="true">●</span><p><strong>Clásica</strong><small>Explota después de unos segundos.</small></p></div>
+        <div class="bomb-rule"><span class="bomb-rule-icon sticky" aria-hidden="true">✹</span><p><strong>Pegajosa</strong><small>Al lanzarla, se adhiere al primer rival que toca.</small></p></div>
+        <div class="bomb-rule"><span class="bomb-rule-icon ice" aria-hidden="true">❄</span><p><strong>Hielo</strong><small>Su explosión congela brevemente a quienes alcanza.</small></p></div>
+        <div class="bomb-rule"><span class="bomb-rule-icon instant" aria-hidden="true">☠</span><p><strong>Instantánea</strong><small>La calavera explota en cuanto lanzas la bomba.</small></p></div>
+        <div class="bomb-rule"><span class="bomb-rule-icon shield" aria-hidden="true">🛡</span><p><strong>Escudo</strong><small>Aparece cada 20 segundos. Recógelo con E / X: protege 7 segundos, pero una explosión lo anula.</small></p></div>
+      </div>
+      <p class="rules-controls"><strong>Controles:</strong> <kbd>WASD</kbd> mover · <kbd>ESPACIO</kbd> saltar · <kbd>E</kbd> recoger · mantén dirección + <kbd>Q</kbd> para lanzar en esa dirección<br><span>Mandos: stick/cruceta + <kbd>B</kbd> para apuntar y lanzar · <kbd>A</kbd> saltar · <kbd>X</kbd> recoger</span></p>
+      <button id="rulesStartBtn" class="primary">¡Entendido, a jugar!</button>
+      <button id="rulesBackBtn" class="ghost">Volver</button>
+    </section>
+
+    <section id="rotatePrompt" class="panel modal hidden" role="status" aria-live="polite">
+      <div class="rotate-phone" aria-hidden="true">▯<span>↻</span></div>
+      <div class="eyebrow">CASI LISTOS</div>
+      <h2>Gira tu celular <strong>a horizontal</strong></h2>
+      <p>Blast Island se juega mejor con la pantalla acostada. Gira el teléfono y la partida comenzará automáticamente.</p>
+    </section>
+
+    <div id="game-wrap" class="hidden">
+      <div id="game"></div>
+      <div id="countdown" class="countdown-overlay hidden" role="status" aria-live="assertive">
+        <span>PREPÁRATE</span>
+        <strong id="countdownValue">3</strong>
+      </div>
+      <section id="pauseMenu" class="pause-overlay hidden" aria-labelledby="pauseTitle">
+        <div class="panel pause-panel">
+          <div class="eyebrow">PARTIDA EN PAUSA</div>
+          <h2 id="pauseTitle">Tómate un <strong>respiro</strong></h2>
+          <p>La partida está detenida.</p>
+          <button id="resumeGameBtn" class="primary">▶ Continuar</button>
+          <button id="pauseSettingsBtn" class="ghost">⚙ Ajustes</button>
+          <button id="pauseExitBtn" class="ghost">↩ Salir al menú</button>
+          <small>Teclado: Esc · Mando: Start / Options</small>
+        </div>
+      </section>
+      <div id="hud"><span id="hudMode" class="hud-mode">TODOS CONTRA TODOS</span><span id="hudTimer">00:00</span><span id="hudAlive">1 vivo</span><button id="pauseTouch" aria-label="Pausar partida">Ⅱ</button><button id="exitGame">↩ Salir</button></div>
+      <aside class="controls-guide" aria-label="Controles para teclado y mando">
+        <section class="guide-card">
+          <div class="guide-heading"><span class="guide-icon keyboard-icon" aria-hidden="true">⌨</span><span><strong>TECLADO</strong><small>Jugador 1</small></span></div>
+          <div class="guide-actions">
+            <div class="guide-action"><span>Mover</span><span class="key-group"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span></div>
+            <div class="guide-action"><span>Saltar</span><kbd class="wide-key">ESPACIO</kbd></div>
+            <div class="guide-action"><span>Recoger</span><kbd>E</kbd></div>
+            <div class="guide-action"><span>Lanzar</span><kbd>Q</kbd></div>
+          </div>
+        </section>
+        <section class="guide-card">
+          <div class="guide-heading"><span class="guide-icon gamepad-icon" aria-hidden="true">🎮</span><span><strong>MANDO</strong><small>Jugadores 2–4</small></span></div>
+          <div class="guide-actions">
+            <div class="guide-action"><span>Mover</span><span class="stick-key" aria-label="Stick izquierdo o cruceta">◉ <small>Stick izq. / cruceta</small></span></div>
+            <div class="guide-action"><span>Saltar</span><kbd>A</kbd></div>
+            <div class="guide-action"><span>Recoger</span><kbd>X</kbd></div>
+            <div class="guide-action"><span>Lanzar</span><kbd>B</kbd></div>
+          </div>
+        </section>
+      </aside>
+      <div id="touch-controls">
+        <div class="touch-move"><span>MOVER</span><div id="stick" aria-label="Control de movimiento"><div id="stick-knob"></div></div></div>
+        <div class="touch-actions">
+          <button id="jumpTouch" aria-label="Saltar"><span aria-hidden="true">↑</span><small>SALTAR</small></button>
+          <button id="pickTouch" aria-label="Recoger bomba o escudo"><span aria-hidden="true">✋</span><small>COGER</small></button>
+          <button id="throwTouch" aria-label="Lanzar bomba"><span aria-hidden="true">●</span><small>LANZAR</small></button>
+        </div>
+      </div>
+      <div id="toast"></div>
+    </div>
+    <section id="ranking" class="panel modal hidden" aria-label="Ranking local">
+      <div class="eyebrow">BASE DE DATOS LOCAL</div>
+      <h2>Ranking</h2>
+      <p id="databaseInfo"></p>
+      <ol id="leaderboardRows" class="leaderboard"></ol>
+      <button id="closeRankingBtn" class="primary">Cerrar</button>
+    </section>
+    <section id="results" class="panel modal hidden" aria-label="Resultado de partida">
+      <div id="resultFireworks" class="result-fireworks" aria-hidden="true"></div>
+      <div id="resultEmblem" class="result-emblem" aria-hidden="true">🏆</div>
+      <div class="eyebrow">PARTIDA TERMINADA</div>
+      <h2 id="resultTitle">¡Victoria!</h2>
+      <p id="resultSummary"></p>
+      <div id="resultPlayers" class="result-players" aria-label="Resultado de los jugadores"></div>
+      <button id="playAgainBtn" class="primary">Jugar de nuevo</button>
+      <button id="menuFromResultsBtn" class="ghost">Volver al menú</button>
+    </section>
+    <section id="settings" class="panel modal hidden" aria-label="Ajustes técnicos">
+      <div class="eyebrow">CONFIGURACIÓN LOCAL</div>
+      <h2>Ajustes</h2>
+      <label>Volumen maestro <input id="settingsVolume" type="range" min="0" max="1" step="0.05"></label>
+      <label>Calidad visual <select id="settingsQuality"><option value="high">Alta</option><option value="low">Baja (mejor rendimiento)</option></select></label>
+      <label>Fotogramas por segundo <select id="settingsFps"><option value="60">60 FPS</option><option value="30">30 FPS</option></select></label>
+      <button id="fullscreenBtn" class="ghost">Pantalla completa</button>
+      <button id="closeSettingsBtn" class="primary">Guardar y cerrar</button>
+    </section>
+  </main>
+</body>
+</html>
